@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import ColunmList from './ColunmList';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  addTask = () => console.log('aqui')
+  updateTask =  () => console.log('aqui')
   render() {
     return (
       <div className="App">
@@ -11,15 +14,12 @@ class App extends Component {
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
         </header>
+        <div>
+          <div className="app-lists">
+            <h2><ColunmList /></h2>
+          </div>
+        </div>
       </div>
     );
   }
