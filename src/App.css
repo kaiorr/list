@@ -9,7 +9,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,6 +33,7 @@
 .colunm-list {
   display: flex;
   font-weight: bold;
-  justify-content: left;
+  align-items: center;
+  flex-direction: column;
   color: #282c34;
 }
