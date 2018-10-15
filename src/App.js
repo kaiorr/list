@@ -5,10 +5,45 @@ import './App.css';
 
 class App extends Component {
 
-  state = { tasks : [] }
+   constructor(){
+     super();
+     const tasks = JSON.parse(window.localStorage.getItem('toDoListTasks') || '[]');
+     this.state = { tasks };
+   }
 
-    addTask = () => console.log('aqui')
-    updateTask =  () => console.log('aqui')
+  updateLocalStorage = tasks => {
+    const stringified = JSON.stringify(tasks);
+    window.localStorage.setItem('toDoListTasks', stringified);
+  }
+
+  updateAndSave(tasks){
+    this.updateLocalStorage(tasks);
+    this.setState({tasks})
+  }
+
+    addTask = (e) => {
+
+      e.preventDefault();
+
+      let { tasks } = this.state;
+      const value = e.target.querySelector("input").value;
+      const newTask = {
+        id: tasks.length + 1,
+        description: value,
+        status: 'To Do'
+      };
+      tasks = tasks.concat(newTask);
+      this.setState({ tasks });
+      this.updateAndSave(tasks);
+    }
+    updateTask =  (target, task) => {
+      let {tasks} = this.state;
+      tasks = tasks.filter(t => t.id !== task.id).concat({
+        ...task,
+        stauts: target.checked ? 'Done' : 'To Do'
+      });
+      this.setState({ tasks });
+    }
   render() {
     const { tasks = [] } = this.state;
     const columns = [
@@ -28,10 +63,10 @@ class App extends Component {
                 key={column.title}
                 columnTitle={column.title}
                 tasks={column.tasks}
+                addTask={this.addTask}
+                updateTask={this.updateTask}
               /></h2>
             ))}
-            
-          
           </div>
         </div>
       </div>
